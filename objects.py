@@ -1,4 +1,5 @@
 class Fred():
+
     x = 0
     y = 625
 
@@ -28,15 +29,18 @@ class Fred():
         self.pygame = None
 
     def moveLeft(self, leftBound):
+
         if self.direction is not 0:
             self.direction = 0
 
         if((self.x - self.speed) > leftBound):
-            self.x -= self.speed
+            self.x -= self.speed  
 
     def moveRight(self, rightBound):
+
         if self.direction is not 1:
             self.direction = 1
+
         if((self.x + self.speed) + 58 < rightBound):
             self.x += self.speed
 
@@ -47,6 +51,7 @@ class Fred():
         self.rightImageHit = pygame.image.load("assets/Fred-Right-Hit.png")
 
     def draw(self, surface, time):
+
         if time - self.timeHit > 800:
             self.timeHit = 0
             self.isHit = False
@@ -54,18 +59,19 @@ class Fred():
         if self.direction is 1:
             if self.isHit is False:
                 surface.blit(self.rightImage, (self.x, self.y))
-            else:
+            else :
                 surface.blit(self.rightImageHit, (self.x, self.y))
-        else:
+        else :
             if self.isHit is False:
                 surface.blit(self.leftImage, (self.x, self.y))
-            else:
+            else :
                 surface.blit(self.leftImageHit, (self.x, self.y))
 
     def __init__(self, x):
         self.x = x
 
 class Barrel():
+
     slots = [(4, 103), (82, 27), (157, 104), (234, 27), (310, 104), (388, 27), (463, 104), (539, 27), (615, 104), (691, 27), (768, 104), (845, 27), (920, 104)]
     slot = 0
     x = 0
@@ -78,7 +84,7 @@ class Barrel():
     timeBroken = 0
     needsRemoving = False
 
-    size = [33, 22]
+    size = [33,22]
     ratio = 0.66
 
     vy = 1.5
@@ -96,7 +102,7 @@ class Barrel():
         hitX = False
         hitY = False
 
-        if fred.x > self.x and fred.x + 57 < self.x + 75:
+        if fred.x > self.x and fred.x < self.x + 75:
             hitX = True
         elif fred.x + 57 > self.x and fred.x + 57 < self.x + 75:
             hitX = True
@@ -112,6 +118,7 @@ class Barrel():
         self.brokenImage = pygame.image.load("assets/Barrel_break.png")
 
     def move(self, windowHeight):
+
         if self.vy < self.maxY:
             self.vy = self.vy * self.gravity
         self.y += self.vy
@@ -122,7 +129,7 @@ class Barrel():
     def draw(self, surface, pygame):
         if self.isBroken is True:
             surface.blit(self.brokenImage, (self.x, self.y))
-        else:
+        else :
             surface.blit(self.image, (self.x, self.y))
 
     def __init__(self, slot):
